@@ -29,6 +29,13 @@
       body .carousel-control-next-icon{
       background-color: blue;
       }
+
+      .carousel-control-prev,
+      .carousel-control-next{
+        top:auto;
+        bottom:auto;
+        }
+
       body .no-padding{
       padding-left:0,
       padding-right:0;
@@ -44,11 +51,14 @@
   {% load static %}
  <!--------------------------------------- Carousel----------------------------------------------------------->
 <div class="container">
-<div id="carouselExampleIndicators" class="carousel slide my-3" data-ride="carousel">
+    <!----Slide Show Start Here---->
+    {% for product,range,nslides in allprods %}
+    <h1>{{product.0.category}}</h1>
+<div id="carouselExampleIndicators{{forloop.counter}}" class="carousel slide my-3" data-ride="carousel">
   <ul class="carousel-indicators">
-    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+    <li data-target="#carouselExampleIndicators{{forloop.counter}}" data-slide-to="0" class="active"></li>
       {% for i in range %}
-    <li data-target="#carouselExampleIndicators" data-slide-to="{{i}}"></li>
+    <li data-target="#carouselExampleIndicators{{forloop.parentloop.counter}}" data-slide-to="{{i}}"></li>
       {% endfor %}
   </ul>
 
@@ -96,17 +106,18 @@
 </div>
 
 <!-----------------------------left & right control for the slide---------------------------------------------->
-   <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+   <a class="carousel-control-prev" href="#carouselExampleIndicators{{forloop.counter}}" role="button" data-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
     <span class="sr-only">Previous</span>
   </a>
-  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+  <a class="carousel-control-next" href="#carouselExampleIndicators{{forloop.counter}}" role="button" data-slide="next">
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="sr-only">Next</span>
   </a>
+{% endfor %}
 
+</div>
 
 {% endblock body %}
 
 
-</div>

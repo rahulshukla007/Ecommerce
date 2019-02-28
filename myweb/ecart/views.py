@@ -13,13 +13,39 @@ def index(request):
          print(i.desc)
 
     n = len(products)
+    #print(n) 9
     nslides = n//4 + ceil(n/4-n//4)
-    params = {"product": products,"no_of_slides":nslides,
-              "range":range(nslides)}
-    #for i in params.values():
-   #     print(i)
-   # print(params)
+    #print(nslparams = {"product": products,"no_of_slides":nslides,"range":range(nslides)}
+    allprods = [[products,range(1,nslides),nslides],
+                 [products,range(1,nslides),nslides]]
+    params = {'allprods':allprods}
     return render(request,'ecart/index.html',params)
+
+
+
+
+#
+# def index(request):
+#     # products = Product.objects.all()
+#     # print(products)
+#     # n = len(products)
+#     # nSlides = n//4 + ceil((n/4)-(n//4))
+#
+#     allProds = []
+#     catprods = Product.objects.values('category', 'id')
+#     cats = {item['category'] for item in catprods}
+#     for cat in cats:
+#         prod = Product.objects.filter(category=cat)
+#         n = len(prod)
+#         nSlides = n // 4 + ceil((n / 4) - (n // 4))
+#         allProds.append([prod, range(1, nSlides), nSlides])
+#
+#     # params = {'no_of_slides':nSlides, 'range': range(1,nSlides),'product': products}
+#     # allProds = [[products, range(1, nSlides), nSlides],
+#     #             [products, range(1, nSlides), nSlides]]
+#     params = {'allProds':allProds}
+#     return render(request, 'shop/index.html', params)
+
 
 def about(request):
     return render(request,'ecart/about.html')
